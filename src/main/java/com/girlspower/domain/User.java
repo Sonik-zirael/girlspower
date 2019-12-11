@@ -14,6 +14,11 @@ public class User {
     private Long id;
 
     private String username;
+    private String name;
+    private String surname;
+    private String birthday;
+    private float height;
+    private float weight;
     private String password;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -21,8 +26,14 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    public User(String username, String password) {
+    public User(String username, String name, String surname, String birthday,
+                float height, float weight, String password) {
         this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.birthday = birthday;
+        this.height = height;
+        this.weight = weight;
         this.username = username;
     }
 
