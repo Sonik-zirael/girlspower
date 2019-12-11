@@ -27,8 +27,8 @@ public class RegistrationController {
                           @RequestParam String name,
                           @RequestParam String surname,
                           @RequestParam String birthday,
-                          @RequestParam float height,
-                          @RequestParam float weight,
+                          @RequestParam Float height,
+                          @RequestParam Float weight,
                           @RequestParam String password,
                           Map<String, Object> model) {
 

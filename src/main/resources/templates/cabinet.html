@@ -10,8 +10,9 @@
 </head>
 <body>
 <div th:insert="fragments/navbar :: header"></div>
-<h5>[[${username}]]</h5>
+<h5 align="center" class="mt-5">Добро пожаловать, [[${username}]]!</h5>
+<p>Ваш текущий вес: [[${info.getWeight()}]]</p>
+<p>Ваш текущий рост: [[${info.getHeight()}]]</p>
 <div th:insert="fragments/settings :: settings"></div>
-
 </body>
 </html>
