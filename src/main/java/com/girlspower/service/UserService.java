@@ -15,10 +15,11 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public String addUser(String username, String password) {
+    public String addUser(String username, String name, String surname, String birthday,
+                          float height, float weight, String password) {
         if (userRepository.findByUsername(username) != null)
             return "User exists!";
-        User newUser = new User(username, password);
+        User newUser = new User(username, name, surname, birthday, height, weight, password);
         newUser.setRoles(Collections.singleton(Role.USER));
         userRepository.save(newUser);
         return "";
