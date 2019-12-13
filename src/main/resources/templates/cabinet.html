@@ -13,6 +13,12 @@
 <h5 align="center" class="mt-5">Добро пожаловать, [[${username}]]!</h5>
 <p>Ваш текущий вес: [[${info.getWeight()}]]</p>
 <p>Ваш текущий рост: [[${info.getHeight()}]]</p>
+<div class="card text-white bg-info m-3" style="max-width: 21rem;">
+<h5 class="card-header">[[${dayTip.getHeadline()}]]</h5>
+<div class="card-body">
+    <p class="card-text">[[${dayTip.getText()}]]</p>
+</div>
+</div>
 <div th:insert="fragments/settings :: settings"></div>
 </body>
 </html>
