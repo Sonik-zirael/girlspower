@@ -17,10 +17,41 @@
 </head>
 <body>
 <div th:insert="fragments/navbar :: header"></div>
-<h5>Empty</h5>
-<div th:insert="fragments/settings :: settings"></div>
-</body>
-</html>
+<div class="m-3">
+    <div>
+        <h1 align="center">Редактировать личную информацию</h1>
+    </div>
+    <span th:text="${result}"></span>
+    <form th:action="@{/redactor}" method="post">
+        <div class="form-group my-3">
+            <label class="col-sm-3 col-form-label"> Имя:</label>
+            <div class="col-sm-6">
+                <input class="form-control" type="text" name="name"/>
+            </div>
+        </div>
+        <div class="form-group my-3">
+            <label class="col-sm-3 col-form-label"> Фамилия:</label>
+            <div class="col-sm-6">
+                <input class="form-control" type="text" name="surname"/>
+            </div>
+        </div>
 
+        <div class="form-group">
+            <label class="col-sm-3 col-form-label"> Старый пароль:</label>
+            <div class="col-sm-6">
+                <input class="form-control" type="password" name="oldPassword"/>
+            </div>
+        </div>
+
+        <div class="form-group m-1">
+            <label class="col-sm-3 col-form-label"> Новый пароль:</label>
+            <div class="col-sm-6">
+                <input class="form-control" type="password" name="newPassword"/>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-danger m-3">Сохранить изменения</button>
+    </form>
+</div>
+<div th:insert="fragments/settings :: settings"></div>
 </body>
 </html>
