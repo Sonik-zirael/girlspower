@@ -3,6 +3,8 @@ package com.girlspower.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,6 +25,9 @@ public class User {
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
     private UserInfo info;
+
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Statistics.class, cascade = CascadeType.ALL)
+    private List<Statistics> statisticsList = new ArrayList<>();
 
     public User(String username, String password) {
         this.password = password;
