@@ -14,13 +14,84 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title>GirlsPower!</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <link rel="stylesheet" type="text/css" href="/graph.css"/>
+
 </head>
 <body>
 <div th:insert="fragments/navbar :: header"></div>
-<h5>Empty</h5>
-<div th:insert="fragments/settings :: settings"></div>
-</body>
-</html>
+<h5>Статистика за всё время пользования сервисом (туду потом допилить возможность временных промежутков)</h5>
+<figure class="highcharts-figure">
+    <div id="graph"></div>
+<!--    Don't remove, it's work only here...-->
+    <script th:inline="javascript">
+    console.log([[${weights}]]);
+        console.log([[${dates}]]);
 
+        var chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'graph'
+            },
+
+        title: {
+            text: 'Weight table'
+        },
+
+        subtitle: {
+            text: ''
+        },
+
+        yAxis: {
+            title: {
+                text: 'Weight'
+            }
+        },
+
+        xAxis: {
+            categories: [[${dates}]]
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                }
+            }
+        },
+
+        series: [{
+            name: 'Weight',
+            data: [[${weights}]]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+    </script>
+</figure>
+<div th:insert="fragments/settings :: settings"></div>
 </body>
 </html>
