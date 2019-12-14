@@ -7,12 +7,41 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title>GirlsPower!</title>
+    <style type="text/css">
+        .progressbar {
+            height: 15px;
+            border-radius: 1em;
+            margin:5px;
+            background:
+              linear-gradient(-45deg,
+                rgba(255, 255, 255, 0.15) 25%,transparent 25%,
+                transparent 50%, rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0.15) 75%,transparent 75%)
+              left/30px 30px repeat-x,
+              linear-gradient(to right, red 0%, yellow 16%, green 18%, yellow 25%, red 30%) left/var(--p,100%) fixed,
+              lightgray;
+          box-shadow:inset 0px -2px 5px rgba(0, 0, 0, 0.5);
+          animation: none;
+        }
+    </style>
 </head>
 <body>
 <div th:insert="fragments/navbar :: header"></div>
 <h5 align="center" class="mt-5">Добро пожаловать, [[${username}]]!</h5>
 <p>Ваш текущий вес: [[${info.getWeight()}]]</p>
 <p>Ваш текущий рост: [[${info.getHeight()}]]</p>
+<p>Ваш текущий индекс массы тела: [[${BMI}]] ([[${descr}]])</p>
+
+<span>&nbsp;0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+    16&emsp;18&emsp;&emsp;&emsp;&emsp;25&emsp;&emsp;&emsp;30</span>
+<div id ="progress" class="progressbar"></div>
+<script>
+    function setBMI() {
+        document.getElementById('progress').style.width = "[[${BMI}]]%";
+    }
+    setBMI();
+</script>
+
 <div class="card text-white bg-info m-3" style="max-width: 21rem;">
 <h5 class="card-header">[[${dayTip.getHeadline()}]]</h5>
 <div class="card-body">
