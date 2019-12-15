@@ -28,8 +28,23 @@
 <body>
 <div th:insert="fragments/navbar :: header"></div>
 <h5 align="center" class="mt-5">Добро пожаловать, [[${username}]]!</h5>
-<p>Ваш текущий вес: [[${info.getWeight()}]]</p>
-<p>Ваш текущий рост: [[${info.getHeight()}]]</p>
+
+<div>
+    <p>Введите новые значения:</p>
+    <form th:action="@{/cabinet}" method="post">
+        <p>
+            <label>Ваш текущий вес:</label>
+            <input type="number" name="weight" th:value="${info.getWeight()}" step="0.01">
+        </p>
+        <p>
+            <label>Ваш текущий вес:</label>
+            <input type="number" name="height" th:value="${info.getHeight()}" step="0.01">
+        </p>
+        <button type="submit">Сохранить новые рост и вес</button>
+    </form>
+</div>
+
+<br>
 <p>Ваш текущий индекс массы тела: [[${BMI}]] ([[${descr}]])</p>
 
 <span>&nbsp;0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
