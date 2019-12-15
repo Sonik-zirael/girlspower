@@ -47,4 +47,24 @@ public class UserInfoService implements UserRepositoryCustom {
             return false;
         }
     }
+
+    public boolean updateUserParams(Float weight, Float height) {
+        try {
+            User currentUser = findByAuthentication();
+            UserInfo currentUserInfo = userInfoRepository.findByUser(currentUser);
+            if (weight != 0) {
+                currentUserInfo.setWeight(weight);
+                currentUser.getInfo().setWeight(weight);
+            }
+            if (height != 0) {
+                currentUserInfo.setHeight(height);
+                currentUser.getInfo().setHeight(height);
+            }
+            userInfoRepository.save(currentUserInfo);
+            userRepository.save(currentUser);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
 }
