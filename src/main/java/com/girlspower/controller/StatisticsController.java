@@ -23,13 +23,16 @@ public class StatisticsController {
         Date[] dateArray = new Date[statistics.size()];
         float[] weightArray = new float[statistics.size()];
         float[] heightArray = new float[statistics.size()];
+        float[] BMIArray = new float[statistics.size()];
         for (int i = 0; i < statistics.size(); i++) {
             dateArray[i] = statistics.get(i).getDate();
             weightArray[i] = statistics.get(i).getWeight();
             heightArray[i] = statistics.get(i).getHeight();
+            BMIArray[i] = weightArray[i] / (float)Math.pow(heightArray[i], 2);
         }
         model.put("dates", dateArray);
         model.put("weights", weightArray);
+        model.put("BMI", BMIArray);
         return "statistics";
     }
 }

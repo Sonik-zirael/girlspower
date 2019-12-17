@@ -29,7 +29,7 @@
     <div id="graph"></div>
 <!--    Don't remove, it's work only here...-->
     <script th:inline="javascript">
-    console.log([[${weights}]]);
+        console.log([[${weights}]]);
         console.log([[${dates}]]);
 
         var chart = new Highcharts.Chart({
@@ -89,6 +89,85 @@
             }]
         }
 
+    });
+    </script>
+</figure>
+<figure class="highcharts-figure">
+    <div id="graphBMI"></div>
+    <!--    Don't remove, it's work only here...-->
+    <script th:inline="javascript">
+        console.log([[${BMI}]]);
+        console.log([[${dates}]]);
+
+        var chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'graphBMI'
+            },
+
+        title: {
+            text: 'Body mass index table'
+        },
+
+        subtitle: {
+            text: ''
+        },
+
+        yAxis: {
+            min: 0,
+            max: 50,
+            tickInterval: 10,
+            title: {
+                text: 'Body mass index'
+            }
+        },
+
+        xAxis: {
+            categories: [[${dates}]]
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                }
+            }
+        },
+
+        series: [{
+            name: 'Body mass index',
+            data: [[${BMI}]],
+            color: {
+            linearGradient: [0, 0, 0, 500],
+            stops: [
+                [0, 'red'],
+                [0.34, 'yellow'],
+                [0.43, 'green'],
+                [0.55, 'yellow'],
+                [0.8, 'red']
+            ]
+        }
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
     });
     </script>
 </figure>
