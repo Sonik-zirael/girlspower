@@ -39,6 +39,9 @@ public class UserService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        if (height > 100) {
+            height /= 100;
+        }
         UserInfo userInfo = UserInfo.builder()
                 .firstName(name)
                 .lastName(surname)

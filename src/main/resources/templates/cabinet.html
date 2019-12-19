@@ -23,45 +23,60 @@
           box-shadow:inset 0px -2px 5px rgba(0, 0, 0, 0.5);
           animation: none;
         }
+
+        .columns {
+             float: left;
+             margin-top: 20px;
+             width: 600px;
+             margin-right: 10px;
+         }
+
     </style>
 </head>
 <body>
 <div th:insert="fragments/navbar :: header"></div>
 <h5 align="center" class="mt-5">Добро пожаловать, [[${username}]]!</h5>
+<div class="columns mx-3">
+    <div>
+        <p>Введите новые значения:</p>
+        <form th:action="@{/cabinet}" method="post">
+            <p>
+                <label>Ваш текущий вес:</label>
+                <input type="number" name="weight" th:value="${info.getWeight()}" step="0.01">
+            </p>
+            <p>
+                <label>Ваш текущий рост:</label>
+                <input type="number" name="height" th:value="${info.getHeight()}" step="0.01">
+            </p>
+            <button type="submit">Сохранить новые рост и вес</button>
+        </form>
+    </div>
 
-<div>
-    <p>Введите новые значения:</p>
-    <form th:action="@{/cabinet}" method="post">
-        <p>
-            <label>Ваш текущий вес:</label>
-            <input type="number" name="weight" th:value="${info.getWeight()}" step="0.01">
-        </p>
-        <p>
-            <label>Ваш текущий вес:</label>
-            <input type="number" name="height" th:value="${info.getHeight()}" step="0.01">
-        </p>
-        <button type="submit">Сохранить новые рост и вес</button>
-    </form>
-</div>
+    <br>
+    <p>Ваш текущий индекс массы тела: [[${BMI}]] ([[${descr}]])</p>
 
-<br>
-<p>Ваш текущий индекс массы тела: [[${BMI}]] ([[${descr}]])</p>
-
-<span>&nbsp;0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+    <span>&nbsp;0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
     16&emsp;18&emsp;&emsp;&emsp;&emsp;25&emsp;&emsp;&emsp;30</span>
-<div id ="progress" class="progressbar"></div>
-<script>
+    <div id="progress" class="progressbar"></div>
+    <script>
     function setBMI() {
         document.getElementById('progress').style.width = "[[${BMI}]]%";
     }
     setBMI();
-</script>
 
-<div class="card text-white bg-info m-3" style="max-width: 21rem;">
-<h5 class="card-header">[[${dayTip.getHeadline()}]]</h5>
-<div class="card-body">
-    <p class="card-text">[[${dayTip.getText()}]]</p>
+
+    </script>
 </div>
+<div class="columns">
+    <div class="card text-white bg-info m-3" style="max-width: 21rem;">
+        <h5 class="card-header">[[${dayTip.getHeadline()}]]</h5>
+        <div class="card-body">
+            <p class="card-text">[[${dayTip.getText()}]]</p>
+        </div>
+    </div>
+    <p>
+        [[${stat}]]
+    </p>
 </div>
 <div th:insert="fragments/settings :: settings"></div>
 </body>

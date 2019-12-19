@@ -26,19 +26,16 @@
 <div th:insert="fragments/navbar :: header"></div>
 <h5>Статистика за всё время пользования сервисом (туду потом допилить возможность временных промежутков)</h5>
 <figure class="highcharts-figure">
-    <div id="graph"></div>
+    <div id="graph" class="mx-5"></div>
 <!--    Don't remove, it's work only here...-->
     <script th:inline="javascript">
-        console.log([[${weights}]]);
-        console.log([[${dates}]]);
-
         var chart = new Highcharts.Chart({
             chart: {
                 renderTo: 'graph'
             },
 
         title: {
-            text: 'Weight table'
+            text: 'Вес'
         },
 
         subtitle: {
@@ -92,20 +89,18 @@
     });
     </script>
 </figure>
+<br>
 <figure class="highcharts-figure">
-    <div id="graphBMI"></div>
+    <div id="graphBMI" class="mx-5"></div>
     <!--    Don't remove, it's work only here...-->
     <script th:inline="javascript">
-        console.log([[${BMI}]]);
-        console.log([[${dates}]]);
-
         var chart = new Highcharts.Chart({
             chart: {
                 renderTo: 'graphBMI'
             },
 
         title: {
-            text: 'Body mass index table'
+            text: 'Индекс массы'
         },
 
         subtitle: {

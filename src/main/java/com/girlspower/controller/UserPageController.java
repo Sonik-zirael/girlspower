@@ -49,6 +49,8 @@ public class UserPageController {
             descr = "ожирение третьей степени";
         }
         model.put("descr", descr);
+        String statisticsString = "Ваш индекс лучше, чем у " + statisticsService.getWorstUsers() + " пользователей";
+        model.put("stat", statisticsString);
         return "/cabinet";
     }
 
@@ -56,6 +58,9 @@ public class UserPageController {
     public String userSave(@RequestParam Float weight,
                            @RequestParam Float height) {
         User user = userInfoService.findByAuthentication();
+        if (height > 100) {
+            height /= 100;
+        }
         userInfoService.updateUserParams(weight, height);
         statisticsService.updateStatistics(user, weight, height);
         return "redirect:/cabinet";
