@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>GirlsPower!</title>
+</head>
+<body>
+<div th:insert="fragments/navbar :: header"></div>
+<div align="center" class="h3 m-3">
+    Рецептики полезного питания
+</div>
+<form th:action="@{/filter}" class="form-inline m-3" method="post">
+    <input class="form-control mr-sm-2" type="search" placeholder="Поиск" name="search">
+    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Искать!</button>
+</form>
+<div class="card-columns m-3">
+    <div th:each="r : ${receiptsList}">
+        <div class="card border-info mb-3" style="max-width: 25rem;">
+            <div class="card-body text-success">
+                <h5 class="card-title">
+                    <a href="receiptPage.html" th:href="@{/receiptPage(receiptId=${r.getId()})}"><h5 class="card-title">
+                        <span th:text="${r.getTitle()}"></span></h5></a>
+                </h5>
+                <p style="
+                        background:url(https://image.flaticon.com/icons/png/512/66/66163.png) no-repeat left center;
+                        background-size: 15px;
+                        display:inline-block;
+                        vertical-align:bottom;
+                        padding-left: 25px;">
+                    [[${r.getTime()}]]
+                </p>
+                <p>
+                    Главный ингридиент: [[${r.getMainProducts()}]]
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="fragments/settings :: settings"></div>
+</body>
+</html>
