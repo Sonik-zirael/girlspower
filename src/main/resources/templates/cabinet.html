@@ -7,23 +7,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title>GirlsPower!</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <style type="text/css">
-        .progressbar {
-            height: 15px;
-            border-radius: 1em;
-            margin:5px;
-            background:
-              linear-gradient(-45deg,
-                rgba(255, 255, 255, 0.15) 25%,transparent 25%,
-                transparent 50%, rgba(255, 255, 255, 0.15) 50%,
-                rgba(255, 255, 255, 0.15) 75%,transparent 75%)
-              left/30px 30px repeat-x,
-              linear-gradient(to right, red 0%, yellow 17%, green 22%, yellow 27%, red 40%) left/var(--p,100%) fixed,
-              lightgray;
-          box-shadow:inset 0px -2px 5px rgba(0, 0, 0, 0.5);
-          animation: none;
-        }
-
         .columns {
              float: left;
              margin-top: 20px;
@@ -31,6 +21,11 @@
              margin-right: 10px;
          }
 
+        .highcharts-figure .chart-container {
+            width: 300px;
+            height: 200px;
+            float: left;
+        }
     </style>
 </head>
 <body>
@@ -55,17 +50,89 @@
     <br>
     <p>Ваш текущий индекс массы тела: [[${BMI}]] ([[${descr}]])</p>
 
-    <span>&nbsp;0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
-    16&emsp;18&emsp;&emsp;&emsp;&emsp;25&emsp;&emsp;&emsp;30</span>
-    <div id="progress" class="progressbar"></div>
-    <script>
-    function setBMI() {
-        document.getElementById('progress').style.width = "[[${BMI}]]%";
-    }
-    setBMI();
+    <figure class="highcharts-figure">
+        <div id="container-BMI" class="chart-container"></div>
+    </figure>
+    <script th:inline="javascript">
+        var ranges = [16, 18.5, 25, 30];
 
+        function getPointColor(val) {
+          if (val > ranges[3]) {
+            return 'red';
+          } else if (val > ranges[2]) {
+            return 'yellow';
+          } else if (val > ranges[1]) {
+            return 'green';
+          } else if (val > ranges[0]) {
+            return 'yellow';
+          } else {
+            return 'red';
+          }
+        }
 
+        function computePoints(val) {
+          var data = [];
+          ranges.forEach(function(range) {
+            if (val > range) {
+              data.unshift({
+                y: range,
+                color: getPointColor(range)
+              });
+            }
+          });
+          data.unshift({
+            y: val,
+            color: getPointColor(val)
+          });
+          return data;
+        }
+
+        var gaugeOptions = {
+            chart: {
+                type: 'solidgauge'
+            },
+
+            title: null,
+
+            pane: {
+                center: ['50%', '85%'],
+                size: '150%',
+                startAngle: -90,
+                endAngle: 90,
+                background: {
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || '#EEE',
+                    innerRadius: '60%',
+                    outerRadius: '100%',
+                    shape: 'arc'
+                }
+            },
+
+            yAxis: {
+                title: {
+                    y: -70
+                },
+                labels: {
+                    y: 16
+                }
+            }
+        };
+
+        var chartBMI = Highcharts.chart('container-BMI', Highcharts.merge(gaugeOptions, {
+            yAxis: {
+                min: 0,
+                max: 50,
+                title: {
+                    text: 'Индекс массы тела'
+                }
+            },
+            series: [{
+                name: 'BMI',
+                data: computePoints([[${BMI}]])
+            }]
+        }));
     </script>
+
 </div>
 <div class="columns">
     <div class="card text-white bg-info m-3" style="max-width: 21rem;">
