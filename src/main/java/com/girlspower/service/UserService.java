@@ -1,8 +1,10 @@
 package com.girlspower.service;
 
 import com.girlspower.domain.Role;
+import com.girlspower.domain.Statistics;
 import com.girlspower.domain.User;
 import com.girlspower.domain.UserInfo;
+import com.girlspower.repos.StatisticsRepository;
 import com.girlspower.repos.UserInfoRepository;
 import com.girlspower.repos.UserRepository;
 import org.springframework.stereotype.Service;
@@ -17,10 +19,12 @@ import java.util.Locale;
 public class UserService {
     private final UserRepository userRepository;
     private final UserInfoRepository userInfoRepository;
+    private final StatisticsRepository statisticsRepository;
 
-    public UserService(UserRepository userRepository, UserInfoRepository userInfoRepository) {
+    public UserService(UserRepository userRepository, UserInfoRepository userInfoRepository, StatisticsRepository statisticsRepository) {
         this.userRepository = userRepository;
         this.userInfoRepository = userInfoRepository;
+        this.statisticsRepository = statisticsRepository;
     }
 
     public String addUser(String username, String name, String surname, String birthday,
@@ -49,7 +53,10 @@ public class UserService {
                 .user(newUser)
                 .height(height)
                 .weight(weight).build();
+        Date date = new Date();
         userInfoRepository.save(userInfo);
+        Statistics statistics = new Statistics(date, weight, height, newUser);
+        statisticsRepository.save(statistics);
         return "";
     }
 }
