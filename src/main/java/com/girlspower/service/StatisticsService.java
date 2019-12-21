@@ -21,8 +21,7 @@ public class StatisticsService {
         this.userRepository = userRepository;
     }
 
-    public void updateStatistics(User user, float weight, float height) {
-        Date date = new Date();
+    public void updateStatistics(User user, float weight, float height, Date date) {
         Statistics statistics;
         if (statisticsRepository.findByOwnerAndDate(user, date) != null) {
             statistics = statisticsRepository.findByOwnerAndDate(user, date);
