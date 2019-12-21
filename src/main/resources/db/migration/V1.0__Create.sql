@@ -21,9 +21,6 @@ CREATE TABLE public.tips (
 );
 
 
-ALTER TABLE public.tips OWNER TO girlspower_user;
-
-
 CREATE SEQUENCE public.tips_id_seq
 START WITH 1
 INCREMENT BY 1
@@ -31,8 +28,6 @@ NO MINVALUE
 NO MAXVALUE
 CACHE 1;
 
-
-ALTER TABLE public.tips_id_seq OWNER TO girlspower_user;
 
 ALTER SEQUENCE public.tips_id_seq OWNED BY public.tips.id;
 
