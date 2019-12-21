@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -74,7 +75,8 @@ public class UserPageController {
             height /= 100;
         }
         userInfoService.updateUserParams(weight, height);
-        statisticsService.updateStatistics(user, weight, height);
+        Date date = new Date();
+        statisticsService.updateStatistics(user, weight, height, date);
         return "redirect:/cabinet";
     }
 }
