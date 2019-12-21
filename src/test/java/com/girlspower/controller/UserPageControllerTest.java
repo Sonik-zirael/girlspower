@@ -1,6 +1,5 @@
 package com.girlspower.controller;
 
-import com.girlspower.domain.UserInfo;
 import com.girlspower.repos.UserRepository;
 import com.girlspower.service.UserInfoService;
 import org.junit.Test;
@@ -14,13 +13,11 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasToString;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -38,14 +35,6 @@ public class UserPageControllerTest {
     private UserInfoService userInfoService;
     @Autowired
     private UserRepository userRepository;
-
-    @Test
-    public void contextLoads() throws Exception {
-        this.mockMvc.perform(get("/"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Добро пожаловать!")));
-    }
 
     @Test
     public void testIfUserPageShowsUsername() throws Exception {
@@ -89,5 +78,13 @@ public class UserPageControllerTest {
                 .andExpect(authenticated())
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("info", hasToString("UserInfo{id=2, firstName='B', lastName='B'}")));
+    }
+
+    @Test
+    public void testIfUserPageShowsDayTip() throws Exception {
+        this.mockMvc.perform(get("/cabinet"))
+                .andExpect(authenticated())
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("dayTip", notNullValue()));
     }
 }
