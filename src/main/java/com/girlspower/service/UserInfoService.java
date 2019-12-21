@@ -25,7 +25,7 @@ public class UserInfoService implements UserRepositoryCustom {
         return userRepository.findByUsername(auth.getName());
     }
 
-    public boolean updateUserInfo(String name, String surname, String oldPassword, String newPassword) {
+    public boolean updateUserInfo(String name, String surname, String oldPassword, String newPassword, Float aim) {
         try {
             User currentUser = findByAuthentication();
             UserInfo currentUserInfo = userInfoRepository.findByUser(currentUser);
@@ -40,6 +40,8 @@ public class UserInfoService implements UserRepositoryCustom {
             if (!oldPassword.equals("") && !newPassword.equals("") && oldPassword.equals(currentUser.getPassword())) {
                 currentUser.setPassword(newPassword);
             }
+            currentUserInfo.setAim(aim);
+            currentUser.getInfo().setAim(aim);
             userInfoRepository.save(currentUserInfo);
             userRepository.save(currentUser);
             return true;

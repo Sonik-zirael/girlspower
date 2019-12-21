@@ -51,6 +51,18 @@ public class UserPageController {
         model.put("descr", descr);
         String statisticsString = "Ваш индекс лучше, чем у " + statisticsService.getWorstUsers() + " пользователей";
         model.put("stat", statisticsString);
+        if (user.getInfo().getAim() != null) {
+            Float diff = user.getInfo().getWeight() - user.getInfo().getAim();
+            String aimString;
+            if (Math.abs(diff) < 0.1) {
+                aimString = "Вы достигли своей цели! Теперь старайтесь поддерживать свой вес.";
+            } else {
+                aimString = "До вашей цели осталось " +
+                        (diff < 0 ? "набрать " : "сбросить ") +
+                        Math.abs(diff) + " кг";
+            }
+            model.put("aim", aimString);
+        }
         return "/cabinet";
     }
 
