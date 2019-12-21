@@ -23,9 +23,9 @@ public class RedactorController {
 
     @PostMapping("/redactor")
     public String updateInfo(@RequestParam String name, @RequestParam String surname, @RequestParam String oldPassword,
-                             @RequestParam String newPassword,
+                             @RequestParam String newPassword, @RequestParam Float aim,
                              Map<String, Object> model) {
-        if (userInfoService.updateUserInfo(name, surname, oldPassword, newPassword)) {
+        if (userInfoService.updateUserInfo(name, surname, oldPassword, newPassword, aim)) {
             model.put("result", "Success!");
         } else {
             model.put("result", "Something wrong");

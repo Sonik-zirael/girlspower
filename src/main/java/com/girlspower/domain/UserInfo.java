@@ -16,6 +16,7 @@ public class UserInfo {
     private String lastName;
     private Float weight;
     private Float height;
+    private Float aim;
 
     @Temporal(TemporalType.DATE)
     private Date birthday;
@@ -25,13 +26,15 @@ public class UserInfo {
     private User user;
 
     @Builder(toBuilder = true)
-    public UserInfo(String firstName, String lastName, Date birthday, User user, Float weight, Float height) {
+    public UserInfo(String firstName, String lastName, Date birthday,
+                    User user, Float weight, Float height, Float aim) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
         this.height = height;
         this.weight = weight;
         this.user = user;
+        this.aim = aim;
     }
 
     public UserInfo() {
