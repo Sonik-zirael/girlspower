@@ -11,17 +11,11 @@ SET row_security = off;
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
-
-
 CREATE TABLE public.tips (
     id bigint NOT NULL,
     headline character varying(255),
     text character varying
 );
-
-
-ALTER TABLE public.tips OWNER TO girlspower_user;
 
 
 CREATE SEQUENCE public.tips_id_seq
@@ -31,8 +25,6 @@ NO MINVALUE
 NO MAXVALUE
 CACHE 1;
 
-
-ALTER TABLE public.tips_id_seq OWNER TO girlspower_user;
 
 ALTER SEQUENCE public.tips_id_seq OWNED BY public.tips.id;
 

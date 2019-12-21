@@ -7,8 +7,6 @@ CREATE TABLE public.receipt (
 );
 
 
-ALTER TABLE public.receipt OWNER TO girlspower_user;
-
 
 CREATE SEQUENCE public.receipt_id_seq
 START WITH 1
@@ -17,8 +15,6 @@ NO MINVALUE
 NO MAXVALUE
 CACHE 1;
 
-
-ALTER TABLE public.receipt_id_seq OWNER TO girlspower_user;
 
 ALTER SEQUENCE public.receipt_id_seq OWNED BY public.receipt.id;
 
