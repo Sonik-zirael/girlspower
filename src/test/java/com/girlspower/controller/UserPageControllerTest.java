@@ -13,12 +13,13 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasToString;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -36,18 +37,54 @@ public class UserPageControllerTest {
     private UserRepository userRepository;
 
     @Test
-    public void contextLoads() throws Exception {
-        this.mockMvc.perform(get("/"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Добро пожаловать!")));
-    }
-
-    @Test
     public void testIfUserPageShowsUsername() throws Exception {
         this.mockMvc.perform(get("/cabinet"))
                 .andExpect(authenticated())
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("username", is("B"))) ;
+                .andExpect(model().attribute("username", is("B")));
+    }
+
+    @Test
+    public void testIfUserPageShowsBMI() throws Exception {
+        double correctBMI = 67 / Math.pow(1.62, 2);
+        correctBMI = (double)Math.round(correctBMI * 100) / 100;
+        String correctDescr = "избыточная масса тела";
+        this.mockMvc.perform(get("/cabinet"))
+                .andExpect(authenticated())
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("BMI", is(correctBMI)))
+                .andExpect(model().attribute("descr", is(correctDescr)));
+    }
+
+    @Test
+    public void testIfUserPageShowsStat() throws Exception {
+        this.mockMvc.perform(get("/cabinet"))
+                .andExpect(authenticated())
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("stat", is("Ваш индекс лучше, чем у 0 пользователей")));
+    }
+
+    @Test
+    public void testIfUserPageShowsAim() throws Exception {
+        this.mockMvc.perform(get("/cabinet"))
+                .andExpect(authenticated())
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("aim", is("До вашей цели осталось сбросить 7.0 кг")));
+    }
+
+    @Test
+    public void testIfUserPageShowsInfo() throws Exception {
+        this.mockMvc.perform(get("/cabinet"))
+                .andExpect(authenticated())
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("info", hasToString("UserInfo{id=2, firstName='B', lastName='B'}")));
+    }
+
+    @Test
+    public void testIfUserPageShowsDayTip() throws Exception {
+        this.mockMvc.perform(get("/cabinet"))
+                .andExpect(authenticated())
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("dayTip", notNullValue()));
     }
 }
