@@ -11,9 +11,6 @@ SET row_security = off;
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
-
-
 CREATE TABLE public.tips (
     id bigint NOT NULL,
     headline character varying(255),
