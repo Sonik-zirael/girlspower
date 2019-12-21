@@ -7,6 +7,9 @@ import com.girlspower.domain.UserInfo;
 import com.girlspower.repos.StatisticsRepository;
 import com.girlspower.repos.UserInfoRepository;
 import com.girlspower.repos.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -16,7 +19,7 @@ import java.util.Date;
 import java.util.Locale;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final UserInfoRepository userInfoRepository;
     private final StatisticsRepository statisticsRepository;
@@ -58,5 +61,10 @@ public class UserService {
         Statistics statistics = new Statistics(date, weight, height, newUser);
         statisticsRepository.save(statistics);
         return "";
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username);
     }
 }
