@@ -36,11 +36,11 @@
         <p>Введите новые значения:</p>
         <form th:action="@{/cabinet}" method="post">
             <p>
-                <label>Ваш текущий вес:</label>
+                <label style="width: 25%;">Ваш текущий вес:</label>
                 <input type="number" name="weight" th:value="${info.getWeight()}" step="0.01">
             </p>
             <p>
-                <label>Ваш текущий рост:</label>
+                <label style="width: 25%;">Ваш текущий рост:</label>
                 <input type="number" name="height" th:value="${info.getHeight()}" step="0.01">
             </p>
             <button type="submit">Сохранить новые рост и вес</button>
