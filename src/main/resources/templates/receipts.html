@@ -22,8 +22,9 @@
         <div class="card border-info mb-3" style="max-width: 25rem;">
             <div class="card-body text-success">
                 <h5 class="card-title">
-                    <a href="receiptPage.html" th:href="@{/receiptPage(receiptId=${r.getId()})}"><h5 class="card-title">
-                        <span th:text="${r.getTitle()}"></span></h5></a>
+                    <a><h5 class="card-title">
+                        <span th:text="${r.getTitle()}"></span></h5>
+                    </a>
                 </h5>
                 <p style="
                         background:url(https://image.flaticon.com/icons/png/512/66/66163.png) no-repeat left center;
@@ -36,7 +37,28 @@
                 <p>
                     Главный ингридиент: [[${r.getMainProducts()}]]
                 </p>
-
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    Показать рецепт
+                </button>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Приготовление</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h3 align="center">[[${r.getTitle()}]]</h3>
+                                <p>
+                                    [[${r.getText()}]]
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
