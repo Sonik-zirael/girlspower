@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>GirlsPower!</title>
+</head>
+<body>
+<div th:insert="fragments/navbar :: header"></div>
+<div class="jumbotron" style="background-color: white; width: 70%">
+    <h2 class="display-3">[[${receiptInfo.getTitle()}]]</h2>
+    <p class="lead">Время приготовления: [[${receiptInfo.getTime()}]]</p>
+    <p class="lead">Главный ингридиент: [[${receiptInfo.getMainProducts()}]]</p>
+    <hr class="m-y-2">
+    <p style="text-align: justify">[[${receiptInfo.getText()}]]</p>
+</div>
+<div th:insert="fragments/settings :: settings"></div>
+</body>
+</html>
