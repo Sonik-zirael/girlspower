@@ -19,6 +19,8 @@ Our website is located at: https://girlspower21.herokuapp.com/
 ### Overview
 
 To start using website you need to register.
+Motivation: this site is a good solution for everyday girls' problems like cooking healty food
+or weight control. We connect everything and placed it in one place.
 Features of the website:
 -   Change your `weight` in order to control it
 -   Automatically calculated `body mass index`
@@ -53,7 +55,8 @@ Please contact any of below people before contributing.
 -   [Anna Brusnitsyna](https://github.com/AnBrusn)
 -   [Irina Shapovalova](https://github.com/ShapovalovaIrina)
 -   [Sophia Shalgueva](https://github.com/Sonik-zirael)
--   [Герастенок Олеся (написать по английский + ссылка на гит)]
+-   Gerastyonok Olesya
+-   Kostilev Daniil
 
 ## License
 
