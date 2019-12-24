@@ -30,8 +30,8 @@
 </head>
 <body>
 <div th:insert="fragments/navbar :: header"></div>
-<h5 align="center" class="mt-5">Добро пожаловать, [[${username}]]!</h5>
-<div class="columns mx-3">
+<h3 align="left" class="m-3">Добро пожаловать, [[${username}]]!</h3>
+<div class="columns m-3">
     <div>
         <p>Введите новые значения:</p>
         <form th:action="@{/cabinet}" method="post">
@@ -43,7 +43,7 @@
                 <label style="width: 25%;">Ваш текущий рост:</label>
                 <input type="number" name="height" th:value="${info.getHeight()}" step="0.01">
             </p>
-            <button type="submit">Сохранить новые рост и вес</button>
+            <button class="btn btn-primary" style="background-color: #A185A1; border: none;" type="submit">Сохранить новые рост и вес</button>
         </form>
     </div>
 
@@ -135,7 +135,7 @@
 
 </div>
 <div class="columns">
-    <div class="card text-white bg-info m-3" style="max-width: 21rem;">
+    <div class="card text-white bg-info" style="max-width: 21rem;">
         <h5 class="card-header">[[${dayTip.getHeadline()}]]</h5>
         <div class="card-body">
             <p class="card-text">[[${dayTip.getText()}]]</p>
