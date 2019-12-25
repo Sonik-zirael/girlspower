@@ -6,7 +6,7 @@
 
 -   [Usage](#usage)
     -   [Overview](#overview)
--   [Project dependencies](#project dependencies)
+-   [Project dependencies](#project-dependencies)
 -   [Maintainer](#maintainer)
 -   [Contributing](#contributing)
     -   [Contributors](#contributors)
