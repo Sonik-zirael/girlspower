@@ -64,7 +64,7 @@ public class UserPageController {
             }
             model.put("aim", aimString);
         }
-        return "/cabinet";
+        return "cabinet";
     }
 
     @PostMapping("/cabinet")
@@ -77,6 +77,6 @@ public class UserPageController {
         userInfoService.updateUserParams(weight, height);
         Date date = new Date();
         statisticsService.updateStatistics(user, weight, height, date);
-        return "redirect:/cabinet";
+        return "cabinet";
     }
 }
