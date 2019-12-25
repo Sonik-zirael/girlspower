@@ -26,7 +26,7 @@ public class ReceiptController {
     public String showReceiptsPage(Map<String, Object> model) {
         Iterable<Receipt> receipts = receiptRepository.findAll();
         model.put("receiptsList", receipts);
-        return "/receipts";
+        return "receipts";
     }
 
     @GetMapping("/receiptPage")
