@@ -30,6 +30,6 @@ public class RedactorController {
         } else {
             model.put("result", "Something wrong");
         }
-        return "redactor";
+        return "redirect:/redactor";
     }
 }

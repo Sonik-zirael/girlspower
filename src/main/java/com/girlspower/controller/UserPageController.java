@@ -29,7 +29,7 @@ public class UserPageController {
     public String showUserCabinet(Map<String, Object> model) {
         User user = userInfoService.findByAuthentication();
         model.put("username", user.getInfo().getFirstName());
-        model.put("info", user.getInfo());
+        model.put("info", userInfoService.getUserInfo(user));
         model.put("dayTip", tipsService.getTodayAdvice());
         double BMI = user.getInfo().getWeight() / Math.pow(user.getInfo().getHeight(), 2);
         model.put("BMI", (double) Math.round(BMI * 100) / 100);
@@ -67,7 +67,7 @@ public class UserPageController {
         return "cabinet";
     }
 
-    @PostMapping("/cabinet")
+    @PostMapping("/cabinetPost")
     public String userSave(@RequestParam Float weight,
                            @RequestParam Float height) {
         User user = userInfoService.findByAuthentication();
@@ -77,6 +77,6 @@ public class UserPageController {
         userInfoService.updateUserParams(weight, height);
         Date date = new Date();
         statisticsService.updateStatistics(user, weight, height, date);
-        return "cabinet";
+        return "redirect:/cabinet";
     }
 }

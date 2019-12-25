@@ -34,7 +34,7 @@
 <div class="columns m-3">
     <div>
         <p>Введите новые значения:</p>
-        <form th:action="@{/cabinet}" method="post">
+        <form th:action="@{/cabinetPost}" method="post">
             <p>
                 <label style="width: 25%;">Ваш текущий вес:</label>
                 <input type="number" name="weight" th:value="${info.getWeight()}" step="0.01">

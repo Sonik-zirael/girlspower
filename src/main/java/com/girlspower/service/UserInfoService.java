@@ -69,4 +69,8 @@ public class UserInfoService implements UserRepositoryCustom {
             return false;
         }
     }
+
+    public UserInfo getUserInfo(User user) {
+        return userInfoRepository.findByUser(user);
+    }
 }
