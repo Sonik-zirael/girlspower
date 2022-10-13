@@ -22,7 +22,7 @@ public class RegistrationController {
         return "registration";
     }
 
-    @PostMapping()
+    @PostMapping("/registration")
     public String addUser(@RequestParam String username,
                           @RequestParam String name,
                           @RequestParam String surname,
